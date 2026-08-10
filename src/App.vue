@@ -106,7 +106,7 @@ onBeforeUnmount(() => {
         <p class="hero-copy">遵循四时风物，以当代手法重述江南滋味。<br />每一道菜，都是一段关于土地与时间的叙事。</p>
         <div class="hero-actions"><button class="btn btn-primary" @click="openBooking">预订一席</button><a class="text-link" href="#menu">探索当季菜单 <span>→</span></a></div>
       </div>
-      <div class="hero-meta"><div><small>营业时间</small><strong>午市 11:30—14:00</strong><strong>晚市 17:30—22:00</strong></div><div><small>地址</small><strong>上海市静安区愚园路 168 号</strong></div></div>
+      <div class="hero-meta"><div><small>营业时间</small><strong>午市 11:30—14:00</strong><strong>晚市 17:30—24:00</strong></div><div><small>地址</small><strong>上海市静安区愚园路 168 号</strong></div></div>
       <a class="scroll-cue" href="#story" aria-label="向下浏览"><span></span>SCROLL</a>
     </section>
 
@@ -146,7 +146,7 @@ onBeforeUnmount(() => {
     <section class="quote-strip"><p>“味至浓时，是克制；情至深处，是寻常。”</p><span>— 主厨 林知远</span></section>
     <section id="contact" class="visit section">
       <div class="visit-copy reveal"><div class="section-label"><span>04</span> VISIT US</div><p class="kicker">期待，与您相见</p><h2>来榆庭，吃一顿<br />属于此刻的饭。</h2><button class="btn btn-dark" @click="openBooking">立即预订</button></div>
-      <div class="visit-details reveal"><div><small>地址 ADDRESS</small><p>上海市静安区愚园路 168 号<br />近乌鲁木齐北路</p><a href="https://maps.google.com" target="_blank" rel="noreferrer">查看地图 →</a></div><div><small>营业 HOURS</small><p>午市 11:30—14:00<br />晚市 17:30—22:00<br />周一店休</p></div><div><small>联系 CONTACT</small><p>021 6888 1688<br />hello@yuting.cn</p></div></div>
+      <div class="visit-details reveal"><div><small>地址 ADDRESS</small><p>上海市静安区愚园路 168 号<br />近乌鲁木齐北路</p><a href="https://maps.google.com" target="_blank" rel="noreferrer">查看地图 →</a></div><div><small>营业 HOURS</small><p>午市 11:30—14:00<br />晚市 17:30—24:00<br />周一店休</p></div><div><small>联系 CONTACT</small><p>021 6888 1688<br />hello@yuting.cn</p></div></div>
     </section>
   </main>
 
