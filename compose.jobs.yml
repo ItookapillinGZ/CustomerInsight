@@ -1,0 +1,67 @@
+# Queue deployment: combine with compose.yml and compose.api.yml.
+# Keep one worker process while the business databases use SQLite.
+x-job-environment: &job-environment
+  APP_DATA_DIR: /data/customerinsight
+  APP_USAGE_DB_PATH: /data/product_usage.sqlite3
+  APP_REDIS_URL: redis://redis:6379/0
+  APP_ANALYSIS_MODE: queued
+  APP_GLOBAL_INFLIGHT: "${APP_GLOBAL_INFLIGHT:-2}"
+
+x-job-service: &job-service
+  build: .
+  image: customerinsight-backend:phase2
+  env_file: .env
+  environment: *job-environment
+  volumes:
+    - usage_data:/data
+  restart: unless-stopped
+  init: true
+  security_opt:
+    - no-new-privileges:true
+  depends_on:
+    redis:
+      condition: service_healthy
+  healthcheck:
+    disable: true
+
+services:
+  customerinsight:
+    image: customerinsight-backend:phase2
+    environment:
+      <<: *job-environment
+      APP_API_URL: http://api:8000
+      APP_API_TOKEN: "${APP_API_TOKEN:?Set APP_API_TOKEN in .env}"
+    depends_on:
+      api:
+        condition: service_healthy
+      worker:
+        condition: service_started
+  api:
+    image: customerinsight-backend:phase2
+    environment:
+      <<: *job-environment
+    depends_on:
+      redis:
+        condition: service_healthy
+  worker:
+    <<: *job-service
+    command: [python, -m, celery, -A, "backend.celery_app:celery_app", worker, --loglevel=INFO, --pool=prefork, --concurrency=1]
+  dispatcher:
+    <<: *job-service
+    command: [python, -m, backend.dispatch]
+  redis:
+    image: redis:7-alpine
+    command: [redis-server, --appendonly, "yes"]
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  redis_data:

@@ -1,0 +1,62 @@
+{
+  "dataset": "Sentiment Labelled Sentences",
+  "dataset_id": "uci-331",
+  "dataset_creator": "Dimitrios Kotzias",
+  "dataset_year": 2015,
+  "dataset_doi": "10.24432/C57604",
+  "dataset_url": "https://archive.ics.uci.edu/dataset/331/sentiment+labelled+sentences",
+  "download_url": "https://archive.ics.uci.edu/static/public/331/sentiment%2Blabelled%2Bsentences.zip",
+  "source_checked_on": "2026-10-15",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "license_evidence_url": "https://archive.ics.uci.edu/dataset/331/sentiment+labelled+sentences",
+  "original_archive_sha256": "afc26626d710899948693e1a61405dce197f57ffa719fa1130d346b4cc095343",
+  "original_archive_bytes": 84188,
+  "original_members": {
+    "amazon": {
+      "member": "sentiment labelled sentences/amazon_cells_labelled.txt",
+      "sha256": "47003fc0a0d4840b00e96e715b6189bad09e7443a3da41c4cbe12ffc79f86ae3",
+      "rows": 1000,
+      "positive": 500,
+      "negative": 500
+    },
+    "yelp": {
+      "member": "sentiment labelled sentences/yelp_labelled.txt",
+      "sha256": "c76468b7b5c6e56a0804d728345c5f84aa2142ddb214420f61cc9cfd4c00d2ea",
+      "rows": 1000,
+      "positive": 500,
+      "negative": 500
+    }
+  },
+  "language": "en",
+  "sample_file": "samples.csv",
+  "sample_sha256": "832a6db091754f6613ba26aa14250df38a6f133263e72d4e9ceb2cec90d1092a",
+  "sample_rows": 100,
+  "sample_seed": 20261015,
+  "sampling": "Fixed-seed shuffled distinct-text stratified sample; equal source/label counts; sorted source_id output.",
+  "stratum_counts": {
+    "amazon/negative": 25,
+    "amazon/positive": 25,
+    "yelp/negative": 25,
+    "yelp/positive": 25
+  },
+  "source_id_rule": "uci331-{source}-{original one-based line number:04d}",
+  "transformations": [
+    "Selected Amazon and Yelp domains only; excluded IMDb movie sentences.",
+    "Mapped original score 0 to negative and 1 to positive.",
+    "Added stable provenance columns; original feedback text is unchanged.",
+    "Subsampled distinct texts; encoded CSV as UTF-8 with BOM for spreadsheet compatibility."
+  ],
+  "reference_label_origin": "Original UCI binary sentiment annotations; not generated or re-labelled by this project.",
+  "not_provided": [
+    "neutral sentiment reference",
+    "category gold labels",
+    "priority gold labels",
+    "aspect gold labels",
+    "rating",
+    "review date"
+  ],
+  "usage_boundary": "Public real review excerpts for ingestion/integration testing and binary sentiment checks; no target-business representativeness or category/priority accuracy claim.",
+  "model_calls_executed": 0,
+  "legacy_evaluation_modified": false
+}

@@ -1,0 +1,134 @@
+# Standalone account deployment. Reuses the existing project-named data volumes.
+# The browser container deliberately receives no secrets or business-data mount.
+x-database-env: &database-env
+  APP_DATABASE_URL: "postgresql+psycopg://customerinsight:${APP_POSTGRES_PASSWORD:?Set APP_POSTGRES_PASSWORD}@postgres:5432/customerinsight"
+  APP_DATA_DIR: /data/customerinsight
+  APP_USAGE_DB_PATH: /data/product_usage.sqlite3
+  APP_REDIS_URL: redis://redis:6379/0
+  APP_ANALYSIS_MODE: queued
+  APP_PUBLIC_MODE: "false"
+  APP_GLOBAL_INFLIGHT: "${APP_GLOBAL_INFLIGHT:-2}"
+
+x-backend: &backend
+  build: .
+  image: customerinsight-backend:phase4
+  restart: unless-stopped
+  init: true
+  security_opt:
+    - no-new-privileges:true
+  volumes:
+    - usage_data:/data
+  environment: *database-env
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+    db-init:
+      condition: service_completed_successfully
+
+services:
+  customerinsight:
+    build: .
+    image: customerinsight-backend:phase4
+    restart: unless-stopped
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "${APP_BIND_HOST:-127.0.0.1}:${APP_PORT:-8501}:8501"
+    environment:
+      APP_UI_MODE: api
+      APP_ANALYSIS_MODE: queued
+      APP_API_URL: http://api:8000
+      APP_PUBLIC_MODE: "false"
+    depends_on:
+      api:
+        condition: service_healthy
+      worker:
+        condition: service_healthy
+      dispatcher:
+        condition: service_healthy
+  api:
+    <<: *backend
+    env_file: .env
+    command: [python, -m, uvicorn, "backend.app:app", --host, 0.0.0.0, --port, "8000", --workers, "1", --no-access-log]
+    ports:
+      - "${APP_BIND_HOST:-127.0.0.1}:${APP_API_PORT:-8000}:8000"
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+  worker:
+    <<: *backend
+    env_file: .env
+    command: [python, -m, celery, -A, "backend.celery_app:celery_app", worker, --loglevel=INFO, --pool=prefork, --concurrency=1]
+    healthcheck:
+      test: [CMD, python, -m, backend.operations, worker]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+  dispatcher:
+    <<: *backend
+    command: [python, -m, backend.dispatch]
+    healthcheck:
+      test: [CMD, python, -m, backend.operations, dispatcher]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s
+  db-init:
+    build: .
+    image: customerinsight-backend:phase4
+    command: [python, -m, alembic, upgrade, head]
+    environment:
+      APP_DATABASE_URL: "postgresql+psycopg://customerinsight:${APP_POSTGRES_PASSWORD:?Set APP_POSTGRES_PASSWORD}@postgres:5432/customerinsight"
+    restart: "no"
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      disable: true
+    depends_on:
+      postgres:
+        condition: service_healthy
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: customerinsight
+      POSTGRES_USER: customerinsight
+      POSTGRES_PASSWORD: "${APP_POSTGRES_PASSWORD:?Set APP_POSTGRES_PASSWORD}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U customerinsight -d customerinsight]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    security_opt:
+      - no-new-privileges:true
+  redis:
+    image: redis:7-alpine
+    command: [redis-server, --appendonly, "yes"]
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  usage_data:
+  postgres_data:
+  redis_data:

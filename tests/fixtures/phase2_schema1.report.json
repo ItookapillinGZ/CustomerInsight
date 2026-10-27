@@ -1,0 +1,536 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "run_id": "333f1589d6494f7e924d9d5082e55f41",
+    "started_at": "2026-10-13T14:12:53.480053+00:00",
+    "completed_at": "2026-10-13T14:12:53.494357+00:00",
+    "mode": "demo",
+    "display_label": "DEMO 合成离线演示",
+    "provider": "mock",
+    "model": "deterministic-mock-v1",
+    "api_mode": "mock",
+    "configured_model": "gpt-5.6-luna",
+    "configured_api_mode": "responses",
+    "request_settings": {
+      "provider": "openai_compatible",
+      "model": "gpt-5.6-luna",
+      "api_mode": "responses",
+      "endpoint_sha256": "d9617135d6fdd0a2cde722d637a1dfcc3da37515708b3ea5d66ae607c8ac785e",
+      "timeout_seconds": 300.0,
+      "max_output_tokens": 8192,
+      "token_parameter": "max_output_tokens",
+      "reasoning_effort": "none",
+      "output_mode": "json_schema",
+      "output_schema_sha256": "cf12bcacb7e9dba59fc805a7f6cb1ef6040f7b771a1a60318ab807cf423afcf4",
+      "chat_json_instruction_sha256": null,
+      "max_retries": 2,
+      "retry_backoff_seconds": 1.0,
+      "sdk_max_retries": 0,
+      "store": false
+    },
+    "prompt_version": "v1",
+    "prompt_hash": "ceb349897427181de8c3e9e8c622968258fd20f56c82a234b6250f38df0131c6",
+    "dataset_hash": "35a081b5fd8fc93ae42143faf9e96b9ae8f5bc81ecdf9e07f61f45fb1ba799e4",
+    "selected_samples_hash": "d208a06c828c3ee5bc896bd2af2b91665f48e32d7b530b82dd152671c838ba9f",
+    "sample_ids": [
+      "dev-001",
+      "dev-002",
+      "dev-003"
+    ],
+    "sample_count": 3,
+    "split": "dev",
+    "max_workers": 2,
+    "application_max_retries": 0,
+    "sdk_max_retries": 0,
+    "request_attempts_upper_bound": 0,
+    "review_status_counts": {
+      "draft": 3,
+      "reviewed": 0
+    },
+    "all_labels_reviewed": false,
+    "result_status": "provisional",
+    "interpretation": "DEMO 仅验证评测流程，预测及耗时均为 Mock；不代表模型效果或性能。",
+    "wall_duration_ms": 23.095
+  },
+  "metrics": {
+    "sample_count": 3,
+    "success_count": 2,
+    "failed_count": 1,
+    "structured_success_rate": 0.6666666666666666,
+    "failures_by_status": {
+      "failed": 1,
+      "validation_error": 0
+    },
+    "latency": {
+      "average_ms": 58.666666666666664,
+      "p95_ms": 83.6,
+      "percentile_method": "linear interpolation",
+      "includes_failures": true,
+      "includes_application_retries_and_backoff": false,
+      "includes_thread_queue_wait": false,
+      "is_mock": true,
+      "measurement": "确定性 Mock 数值，仅演示指标计算，不能代表真实接口性能。"
+    },
+    "metric_policy": {
+      "denominator": "全部有效评测样本；调用或结构校验失败均计为错误。",
+      "macro_f1": "完整固定枚举标签集合；零分母取 0；逐类展示 support。",
+      "failure_prediction": "无有效预测；混淆矩阵使用独立 __failure__ 列。"
+    },
+    "sentiment": {
+      "accuracy": 0.3333333333333333,
+      "macro_f1": 0.16666666666666666,
+      "labels": [
+        "positive",
+        "negative",
+        "neutral"
+      ],
+      "per_class": {
+        "positive": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "negative": {
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5,
+          "support": 3
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        }
+      },
+      "confusion_matrix": {
+        "gold_labels": [
+          "positive",
+          "negative",
+          "neutral"
+        ],
+        "prediction_labels": [
+          "positive",
+          "negative",
+          "neutral",
+          "__failure__"
+        ],
+        "values": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    "category": {
+      "accuracy": 0.0,
+      "macro_f1": 0.0,
+      "labels": [
+        "product_quality",
+        "customer_service",
+        "pricing",
+        "delivery",
+        "user_experience",
+        "features",
+        "bugs",
+        "suggestions",
+        "other"
+      ],
+      "per_class": {
+        "product_quality": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "customer_service": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "pricing": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "delivery": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "user_experience": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "features": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "bugs": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 3
+        },
+        "suggestions": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        },
+        "other": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        }
+      },
+      "confusion_matrix": {
+        "gold_labels": [
+          "product_quality",
+          "customer_service",
+          "pricing",
+          "delivery",
+          "user_experience",
+          "features",
+          "bugs",
+          "suggestions",
+          "other"
+        ],
+        "prediction_labels": [
+          "product_quality",
+          "customer_service",
+          "pricing",
+          "delivery",
+          "user_experience",
+          "features",
+          "bugs",
+          "suggestions",
+          "other",
+          "__failure__"
+        ],
+        "values": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    "priority": {
+      "accuracy": 0.6666666666666666,
+      "macro_f1": 0.3333333333333333,
+      "labels": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "per_class": {
+        "high": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2
+        },
+        "medium": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1
+        },
+        "low": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0
+        }
+      },
+      "confusion_matrix": {
+        "gold_labels": [
+          "high",
+          "medium",
+          "low"
+        ],
+        "prediction_labels": [
+          "high",
+          "medium",
+          "low",
+          "__failure__"
+        ],
+        "values": [
+          [
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    }
+  },
+  "predictions": [
+    {
+      "sample_id": "dev-001",
+      "text": "更新后每次输入正确密码都提示服务器错误，所有同事都无法登录，今天的订单完全处理不了。",
+      "gold_sentiment": "negative",
+      "gold_category": "bugs",
+      "gold_priority": "high",
+      "split": "dev",
+      "review_status": "draft",
+      "predicted_sentiment": "neutral",
+      "predicted_category": "product_quality",
+      "predicted_priority": "high",
+      "summary": "DEMO：按反馈文本和 ID 的哈希生成确定性预测。",
+      "status": "success",
+      "latency_ms": 20.0,
+      "error_message": null,
+      "error_fields": [
+        "情感错误",
+        "类别错误"
+      ],
+      "prediction_source": "demo"
+    },
+    {
+      "sample_id": "dev-002",
+      "text": "付款页面点了一次确认却生成两笔扣款，银行账单也显示重复扣费，请立即修复。",
+      "gold_sentiment": "negative",
+      "gold_category": "bugs",
+      "gold_priority": "high",
+      "split": "dev",
+      "review_status": "draft",
+      "predicted_sentiment": "negative",
+      "predicted_category": "customer_service",
+      "predicted_priority": "high",
+      "summary": "DEMO：按反馈文本和 ID 的哈希生成确定性预测。",
+      "status": "success",
+      "latency_ms": 85.0,
+      "error_message": null,
+      "error_fields": [
+        "类别错误"
+      ],
+      "prediction_source": "demo"
+    },
+    {
+      "sample_id": "dev-003",
+      "text": "导出的 Excel 文件少了最后十行数据，不过 CSV 导出完整，暂时可以绕过。",
+      "gold_sentiment": "negative",
+      "gold_category": "bugs",
+      "gold_priority": "medium",
+      "split": "dev",
+      "review_status": "draft",
+      "predicted_sentiment": null,
+      "predicted_category": null,
+      "predicted_priority": null,
+      "summary": null,
+      "status": "failed",
+      "latency_ms": 71.0,
+      "error_message": "DEMO：模拟调用失败。",
+      "error_fields": [
+        "调用失败"
+      ],
+      "prediction_source": "demo"
+    }
+  ],
+  "errors": [
+    {
+      "sample_id": "dev-001",
+      "text": "更新后每次输入正确密码都提示服务器错误，所有同事都无法登录，今天的订单完全处理不了。",
+      "gold_sentiment": "negative",
+      "gold_category": "bugs",
+      "gold_priority": "high",
+      "split": "dev",
+      "review_status": "draft",
+      "predicted_sentiment": "neutral",
+      "predicted_category": "product_quality",
+      "predicted_priority": "high",
+      "summary": "DEMO：按反馈文本和 ID 的哈希生成确定性预测。",
+      "status": "success",
+      "latency_ms": 20.0,
+      "error_message": null,
+      "error_fields": [
+        "情感错误",
+        "类别错误"
+      ],
+      "prediction_source": "demo"
+    },
+    {
+      "sample_id": "dev-002",
+      "text": "付款页面点了一次确认却生成两笔扣款，银行账单也显示重复扣费，请立即修复。",
+      "gold_sentiment": "negative",
+      "gold_category": "bugs",
+      "gold_priority": "high",
+      "split": "dev",
+      "review_status": "draft",
+      "predicted_sentiment": "negative",
+      "predicted_category": "customer_service",
+      "predicted_priority": "high",
+      "summary": "DEMO：按反馈文本和 ID 的哈希生成确定性预测。",
+      "status": "success",
+      "latency_ms": 85.0,
+      "error_message": null,
+      "error_fields": [
+        "类别错误"
+      ],
+      "prediction_source": "demo"
+    },
+    {
+      "sample_id": "dev-003",
+      "text": "导出的 Excel 文件少了最后十行数据，不过 CSV 导出完整，暂时可以绕过。",
+      "gold_sentiment": "negative",
+      "gold_category": "bugs",
+      "gold_priority": "medium",
+      "split": "dev",
+      "review_status": "draft",
+      "predicted_sentiment": null,
+      "predicted_category": null,
+      "predicted_priority": null,
+      "summary": null,
+      "status": "failed",
+      "latency_ms": 71.0,
+      "error_message": "DEMO：模拟调用失败。",
+      "error_fields": [
+        "调用失败"
+      ],
+      "prediction_source": "demo"
+    }
+  ]
+}

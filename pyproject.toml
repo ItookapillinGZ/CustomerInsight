@@ -1,0 +1,97 @@
+[project]
+name = "customerinsight"
+version = "1.7.0"
+description = "CustomerInsight — self-hosted grouped review analysis, visual reports and traceable evaluation."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "ysskrishna", email = "sivasaikrishnassk@gmail.com"}
+]
+keywords = [
+    "ai",
+    "customer-feedback",
+    "sentiment-analysis",
+    "openai",
+    "gpt",
+    "streamlit",
+    "web-app",
+    "feedback-analysis",
+    "nlp",
+    "natural-language-processing",
+    "customer-insights",
+    "business-intelligence",
+    "actionable-items",
+    "priority-assessment",
+    "feedback-categorization",
+    "customer-service",
+    "product-feedback",
+    "user-experience",
+    "ai-analysis",
+    "structured-output",
+    "pydantic",
+    "python",
+    "open-source",
+    "ysskrishna"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Other Audience",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Environment :: Web Environment",
+    "Framework :: Streamlit",
+    "Natural Language :: English",
+    "Typing :: Typed",
+]
+dependencies = [
+    "altair>=5.5,<6",  # Interactive customer-report charts, already in the lock.
+    "numpy>=1.26,<3",  # Preserve typed numeric/date values in local history.
+    "openai>=1.109.1,<2",  # Preserve the original lock's Responses.parse SDK version.
+    "pandas>=2.2,<3",  # Used directly for CSV processing and result statistics.
+    "openpyxl>=3.1.5,<4",  # Read user-uploaded Excel workbooks.
+    "pydantic>=2.9.2",  # Required for data validation and type safety
+    "python-dotenv>=1.1.1",
+    "streamlit>=1.50.0,<2",  # The UI uses the width='stretch' dataframe API.
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.30,<1",
+    "python-multipart>=0.0.22,<1",
+    "httpx>=0.28,<1",
+    "celery[redis]>=5.6,<6",
+    "redis>=5,<7",
+    "sqlalchemy>=2.0,<3",
+    "alembic>=1.14,<2",
+    "psycopg[binary]>=3.2,<4",
+    "argon2-cffi>=23.1,<26",
+]
+
+[project.urls]
+Homepage = "https://github.com/ItookapillinGZ/CustomerInsight"
+Repository = "https://github.com/ItookapillinGZ/CustomerInsight.git"
+Documentation = "https://github.com/ItookapillinGZ/CustomerInsight#readme"
+Issues = "https://github.com/ItookapillinGZ/CustomerInsight/issues"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["ai", "core", "models", "evaluation", "backend"]
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.package-data]
+evaluation = ["data/*.csv", "*.md"]
+core = ["demo_data/*.json"]

@@ -1,36 +1,38 @@
-# Dependencies
-node_modules/
-
-# Build output and caches
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
 dist/
-.vite/
-coverage/
+wheels/
+*.egg-info
 
-# Environment files (keep examples/templates)
+# Virtual environments
+.venv
+.uv-cache/
 .env
 .env.*
 !.env.example
-!.env.*.example
+.runtime/
+.streamlit/secrets.toml
+node_modules/
+workspace/
+evaluation_reports/
+.test-tmp/
 
-# Logs
+# Local document artifacts may contain personal information.
+tmp/pdfs/
+output/pdf/
+
+# Local reports, uploads, credentials and publishing workspaces.
+tmp/
+output/
+outputs/
+validation/
+.review-runtime-temp/
+evaluation/reviews/
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite3-*
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Editors and IDEs
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Operating system files
-.DS_Store
-Thumbs.db
-Desktop.ini
-
-# Local temporary files
-*.tmp
-*.temp
-
+.inspect.ndjson

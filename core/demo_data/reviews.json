@@ -1,0 +1,1100 @@
+{
+  "version": "demo_workspace_v1",
+  "data_origin": "synthetic",
+  "label_origin": "predefined",
+  "description": "由开发者编写的固定中文电商评价示例，不含私人信息、真实订单或模型预测；仅供演示。",
+  "previous": {
+    "id": "demo-previous-202610",
+    "filename": "青岚杯具_合成示例_previous.xlsx",
+    "created_at": "2026-10-08T09:00:00+08:00",
+    "reviews": [
+      {
+        "review_id": "DEMO-PREVIOUS-001",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-01",
+        "text": "物流晚了两天才到，周末出行没能带上。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "物流晚了两天才到，周末出行没能带上",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "物流晚了两天才到，周末出行没能带上"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-002",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-02",
+        "text": "下单三天后才发货，希望把预计发货时间写清楚。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "下单三天后才发货，希望把预计发货时间写清楚",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "下单三天后才发货，希望把预计发货时间写清楚"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-003",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-03",
+        "text": "快递在中转站停留了两天，等得比较久。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "快递在中转站停留了两天，等得比较久",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "快递在中转站停留了两天，等得比较久"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-004",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-04",
+        "text": "说好周五到货，实际周日才收到。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "说好周五到货，实际周日才收到",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "说好周五到货，实际周日才收到"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-005",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-05",
+        "text": "配送比页面预计晚了一天，购买体验一般。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "配送比页面预计晚了一天，购买体验一般",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "配送比页面预计晚了一天，购买体验一般"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-006",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-06",
+        "text": "外盒压瘪了，杯身有明显凹痕，已经申请换货。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "high",
+        "summary": "外盒压瘪了，杯身有明显凹痕，已经申请换货",
+        "aspects": [
+          {
+            "topic": "包装破损",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "外盒压瘪了，杯身有明显凹痕，已经申请换货"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-007",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-07",
+        "text": "拆包发现纸盒角破了，送礼不太合适。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "拆包发现纸盒角破了，送礼不太合适",
+        "aspects": [
+          {
+            "topic": "包装破损",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "拆包发现纸盒角破了，送礼不太合适"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-008",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-01",
+        "text": "收到时杯盖裂了，包装里面没有防护垫。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "high",
+        "summary": "收到时杯盖裂了，包装里面没有防护垫",
+        "aspects": [
+          {
+            "topic": "包装破损",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "收到时杯盖裂了，包装里面没有防护垫"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-009",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-02",
+        "text": "纸箱开口松了，杯子在盒内来回晃动。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "纸箱开口松了，杯子在盒内来回晃动",
+        "aspects": [
+          {
+            "topic": "包装破损",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "纸箱开口松了，杯子在盒内来回晃动"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-010",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-03",
+        "text": "外包装被雨水打湿，说明书也湿了。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "外包装被雨水打湿，说明书也湿了",
+        "aspects": [
+          {
+            "topic": "包装破损",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "外包装被雨水打湿，说明书也湿了"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-011",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-04",
+        "text": "咨询如何清洗杯盖，过了半天客服才回复。",
+        "sentiment": "negative",
+        "category": "customer_service",
+        "priority": "medium",
+        "summary": "咨询如何清洗杯盖，过了半天客服才回复",
+        "aspects": [
+          {
+            "topic": "客服响应慢",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "咨询如何清洗杯盖，过了半天客服才回复"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-012",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-05",
+        "text": "问配件能不能单买，客服一直没有答复。",
+        "sentiment": "negative",
+        "category": "customer_service",
+        "priority": "medium",
+        "summary": "问配件能不能单买，客服一直没有答复",
+        "aspects": [
+          {
+            "topic": "客服响应慢",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "问配件能不能单买，客服一直没有答复"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-013",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-06",
+        "text": "换货申请提交两天了，没有收到客服处理消息。",
+        "sentiment": "negative",
+        "category": "customer_service",
+        "priority": "high",
+        "summary": "换货申请提交两天了，没有收到客服处理消息",
+        "aspects": [
+          {
+            "topic": "客服响应慢",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "换货申请提交两天了，没有收到客服处理消息"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-014",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-07",
+        "text": "早上装的热水到下午还是温热的，保温很满意。",
+        "sentiment": "positive",
+        "category": "product_quality",
+        "priority": "low",
+        "summary": "早上装的热水到下午还是温热的，保温很满意",
+        "aspects": [
+          {
+            "topic": "保温效果",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "早上装的热水到下午还是温热的，保温很满意"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-015",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-01",
+        "text": "办公室用了一周，保温时间比旧杯子长。",
+        "sentiment": "positive",
+        "category": "product_quality",
+        "priority": "low",
+        "summary": "办公室用了一周，保温时间比旧杯子长",
+        "aspects": [
+          {
+            "topic": "保温效果",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "办公室用了一周，保温时间比旧杯子长"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-016",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-02",
+        "text": "上班带热茶很方便，喝到中午温度刚好。",
+        "sentiment": "positive",
+        "category": "product_quality",
+        "priority": "low",
+        "summary": "上班带热茶很方便，喝到中午温度刚好",
+        "aspects": [
+          {
+            "topic": "保温效果",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "上班带热茶很方便，喝到中午温度刚好"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-017",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-03",
+        "text": "杯子很轻，放在小包里通勤没有负担。",
+        "sentiment": "positive",
+        "category": "user_experience",
+        "priority": "low",
+        "summary": "杯子很轻，放在小包里通勤没有负担",
+        "aspects": [
+          {
+            "topic": "便携体验",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "杯子很轻，放在小包里通勤没有负担"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-018",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-04",
+        "text": "大小适合短途出门，单手拿着也舒服。",
+        "sentiment": "positive",
+        "category": "user_experience",
+        "priority": "low",
+        "summary": "大小适合短途出门，单手拿着也舒服",
+        "aspects": [
+          {
+            "topic": "便携体验",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "大小适合短途出门，单手拿着也舒服"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-019",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-05",
+        "text": "装水后放在背包里没有漏，密封效果很好。",
+        "sentiment": "positive",
+        "category": "product_quality",
+        "priority": "low",
+        "summary": "装水后放在背包里没有漏，密封效果很好",
+        "aspects": [
+          {
+            "topic": "密封防漏",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "装水后放在背包里没有漏，密封效果很好"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-020",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-06",
+        "text": "杯盖拧紧后倒置也不漏水，户外带着放心。",
+        "sentiment": "positive",
+        "category": "product_quality",
+        "priority": "low",
+        "summary": "杯盖拧紧后倒置也不漏水，户外带着放心",
+        "aspects": [
+          {
+            "topic": "密封防漏",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "杯盖拧紧后倒置也不漏水，户外带着放心"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-021",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-07",
+        "text": "客服把清洗步骤解释得很清楚，解决了我的疑问。",
+        "sentiment": "positive",
+        "category": "customer_service",
+        "priority": "low",
+        "summary": "客服把清洗步骤解释得很清楚，解决了我的疑问",
+        "aspects": [
+          {
+            "topic": "客服解答",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "客服把清洗步骤解释得很清楚，解决了我的疑问"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-022",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-01",
+        "text": "客服耐心说明了材质和容量，回答很具体。",
+        "sentiment": "positive",
+        "category": "customer_service",
+        "priority": "low",
+        "summary": "客服耐心说明了材质和容量，回答很具体",
+        "aspects": [
+          {
+            "topic": "客服解答",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "客服耐心说明了材质和容量，回答很具体"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-023",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-02",
+        "text": "在预计日期收到了，正好赶上出差。",
+        "sentiment": "positive",
+        "category": "delivery",
+        "priority": "low",
+        "summary": "在预计日期收到了，正好赶上出差",
+        "aspects": [
+          {
+            "topic": "配送准时",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "在预计日期收到了，正好赶上出差"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-024",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-03",
+        "text": "昨天发货今天就到，配送速度不错。",
+        "sentiment": "positive",
+        "category": "delivery",
+        "priority": "low",
+        "summary": "昨天发货今天就到，配送速度不错",
+        "aspects": [
+          {
+            "topic": "配送准时",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "昨天发货今天就到，配送速度不错"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-025",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-04",
+        "text": "杯口比较大，清洗茶渍方便。",
+        "sentiment": "positive",
+        "category": "user_experience",
+        "priority": "low",
+        "summary": "杯口比较大，清洗茶渍方便",
+        "aspects": [
+          {
+            "topic": "清洁便利",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "杯口比较大，清洗茶渍方便"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-026",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-05",
+        "text": "容量刚好够半天徒步使用，不用频繁接水。",
+        "sentiment": "positive",
+        "category": "user_experience",
+        "priority": "low",
+        "summary": "容量刚好够半天徒步使用，不用频繁接水",
+        "aspects": [
+          {
+            "topic": "容量适用",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "容量刚好够半天徒步使用，不用频繁接水"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-027",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-06",
+        "text": "浅蓝色很耐看，实际颜色和图片一致。",
+        "sentiment": "positive",
+        "category": "user_experience",
+        "priority": "low",
+        "summary": "浅蓝色很耐看，实际颜色和图片一致",
+        "aspects": [
+          {
+            "topic": "外观设计",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "浅蓝色很耐看，实际颜色和图片一致"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-028",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-07",
+        "text": "如果延迟发货时能主动发消息提醒就更好了。",
+        "sentiment": "neutral",
+        "category": "features",
+        "priority": "low",
+        "summary": "如果延迟发货时能主动发消息提醒就更好了",
+        "aspects": [
+          {
+            "topic": "订单进度提醒",
+            "kind": "request",
+            "sentiment": "neutral",
+            "evidence": "如果延迟发货时能主动发消息提醒就更好了"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-029",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-01",
+        "text": "希望能在订单页看到更明确的预计送达时间。",
+        "sentiment": "neutral",
+        "category": "features",
+        "priority": "low",
+        "summary": "希望能在订单页看到更明确的预计送达时间",
+        "aspects": [
+          {
+            "topic": "订单进度提醒",
+            "kind": "request",
+            "sentiment": "neutral",
+            "evidence": "希望能在订单页看到更明确的预计送达时间"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-PREVIOUS-030",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-02",
+        "text": "建议减少一次性塑料袋，纸质保护就足够了。",
+        "sentiment": "neutral",
+        "category": "suggestions",
+        "priority": "low",
+        "summary": "建议减少一次性塑料袋，纸质保护就足够了",
+        "aspects": [
+          {
+            "topic": "包装减塑",
+            "kind": "request",
+            "sentiment": "neutral",
+            "evidence": "建议减少一次性塑料袋，纸质保护就足够了"
+          }
+        ]
+      }
+    ]
+  },
+  "current": {
+    "id": "demo-current-202610",
+    "filename": "青岚杯具_合成示例_current.xlsx",
+    "created_at": "2026-10-15T09:00:00+08:00",
+    "reviews": [
+      {
+        "review_id": "DEMO-CURRENT-001",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-08",
+        "text": "物流五天都没有更新，原定出差前到货却没赶上。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "high",
+        "summary": "物流五天都没有更新，原定出差前到货却没赶上",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "物流五天都没有更新，原定出差前到货却没赶上"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-002",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-09",
+        "text": "付款两天才出库，快递又延误了一天。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "付款两天才出库，快递又延误了一天",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "付款两天才出库，快递又延误了一天"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-003",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-10",
+        "text": "预计周二送达，实际周四才拿到杯子。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "预计周二送达，实际周四才拿到杯子",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "预计周二送达，实际周四才拿到杯子"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-004",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-11",
+        "text": "包裹在中转站卡了三天，希望及时提醒。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "包裹在中转站卡了三天，希望及时提醒",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "包裹在中转站卡了三天，希望及时提醒"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-005",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-12",
+        "text": "买给家人的礼物晚到了两天，发货速度需要改进。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "买给家人的礼物晚到了两天，发货速度需要改进",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "买给家人的礼物晚到了两天，发货速度需要改进"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-006",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-13",
+        "text": "页面写着次日发货，等了三天才有揽收信息。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "页面写着次日发货，等了三天才有揽收信息",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "页面写着次日发货，等了三天才有揽收信息"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-007",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-14",
+        "text": "配送时间比预计长了一天，其他方面暂时没问题。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "配送时间比预计长了一天，其他方面暂时没问题",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "配送时间比预计长了一天，其他方面暂时没问题"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-008",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-08",
+        "text": "快递到了本地又停了一天，想知道延迟原因。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "快递到了本地又停了一天，想知道延迟原因",
+        "aspects": [
+          {
+            "topic": "物流延迟",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "快递到了本地又停了一天，想知道延迟原因"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-009",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-09",
+        "text": "外箱破了，杯口被磕出缺口，已经联系退换。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "high",
+        "summary": "外箱破了，杯口被磕出缺口，已经联系退换",
+        "aspects": [
+          {
+            "topic": "包装破损",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "外箱破了，杯口被磕出缺口，已经联系退换"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-010",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-10",
+        "text": "礼盒一角被压坏，虽然杯子没事但不适合直接送人。",
+        "sentiment": "negative",
+        "category": "delivery",
+        "priority": "medium",
+        "summary": "礼盒一角被压坏，虽然杯子没事但不适合直接送人",
+        "aspects": [
+          {
+            "topic": "包装破损",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "礼盒一角被压坏，虽然杯子没事但不适合直接送人"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-011",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-11",
+        "text": "询问物流为什么不更新，客服隔天才回应。",
+        "sentiment": "negative",
+        "category": "customer_service",
+        "priority": "medium",
+        "summary": "询问物流为什么不更新，客服隔天才回应",
+        "aspects": [
+          {
+            "topic": "客服响应慢",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "询问物流为什么不更新，客服隔天才回应"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-012",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-12",
+        "text": "杯盖坏了申请售后，两天仍没有人工回复。",
+        "sentiment": "negative",
+        "category": "customer_service",
+        "priority": "high",
+        "summary": "杯盖坏了申请售后，两天仍没有人工回复",
+        "aspects": [
+          {
+            "topic": "客服响应慢",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "杯盖坏了申请售后，两天仍没有人工回复"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-013",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-13",
+        "text": "问替换密封圈型号，排队半小时后还是没有答复。",
+        "sentiment": "negative",
+        "category": "customer_service",
+        "priority": "medium",
+        "summary": "问替换密封圈型号，排队半小时后还是没有答复",
+        "aspects": [
+          {
+            "topic": "客服响应慢",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "问替换密封圈型号，排队半小时后还是没有答复"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-014",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-14",
+        "text": "咨询清洗方式时只收到自动回复，希望更快转人工。",
+        "sentiment": "negative",
+        "category": "customer_service",
+        "priority": "medium",
+        "summary": "咨询清洗方式时只收到自动回复，希望更快转人工",
+        "aspects": [
+          {
+            "topic": "客服响应慢",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "咨询清洗方式时只收到自动回复，希望更快转人工"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-015",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-08",
+        "text": "售后表单交了很久，客服响应太慢了。",
+        "sentiment": "negative",
+        "category": "customer_service",
+        "priority": "medium",
+        "summary": "售后表单交了很久，客服响应太慢了",
+        "aspects": [
+          {
+            "topic": "客服响应慢",
+            "kind": "issue",
+            "sentiment": "negative",
+            "evidence": "售后表单交了很久，客服响应太慢了"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-016",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-09",
+        "text": "上午泡的茶下午还温热，日常办公够用了。",
+        "sentiment": "positive",
+        "category": "product_quality",
+        "priority": "low",
+        "summary": "上午泡的茶下午还温热，日常办公够用了",
+        "aspects": [
+          {
+            "topic": "保温效果",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "上午泡的茶下午还温热，日常办公够用了"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-017",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-10",
+        "text": "这几天带去上班，保温稳定也没有异味。",
+        "sentiment": "positive",
+        "category": "product_quality",
+        "priority": "low",
+        "summary": "这几天带去上班，保温稳定也没有异味",
+        "aspects": [
+          {
+            "topic": "保温效果",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "这几天带去上班，保温稳定也没有异味"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-018",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-11",
+        "text": "小杯子带去健身正合适，轻巧不占地方。",
+        "sentiment": "positive",
+        "category": "user_experience",
+        "priority": "low",
+        "summary": "小杯子带去健身正合适，轻巧不占地方",
+        "aspects": [
+          {
+            "topic": "便携体验",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "小杯子带去健身正合适，轻巧不占地方"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-019",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-12",
+        "text": "通勤包侧袋放得下，单手握持也方便。",
+        "sentiment": "positive",
+        "category": "user_experience",
+        "priority": "low",
+        "summary": "通勤包侧袋放得下，单手握持也方便",
+        "aspects": [
+          {
+            "topic": "便携体验",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "通勤包侧袋放得下，单手握持也方便"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-020",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-13",
+        "text": "放在登山包里走了一天，没有发现漏水。",
+        "sentiment": "positive",
+        "category": "product_quality",
+        "priority": "low",
+        "summary": "放在登山包里走了一天，没有发现漏水",
+        "aspects": [
+          {
+            "topic": "密封防漏",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "放在登山包里走了一天，没有发现漏水"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-021",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-14",
+        "text": "密封圈贴合得很好，横放也没有洒出来。",
+        "sentiment": "positive",
+        "category": "product_quality",
+        "priority": "low",
+        "summary": "密封圈贴合得很好，横放也没有洒出来",
+        "aspects": [
+          {
+            "topic": "密封防漏",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "密封圈贴合得很好，横放也没有洒出来"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-022",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-08",
+        "text": "客服说明了第一次使用的清洗方法，步骤很清楚。",
+        "sentiment": "positive",
+        "category": "customer_service",
+        "priority": "low",
+        "summary": "客服说明了第一次使用的清洗方法，步骤很清楚",
+        "aspects": [
+          {
+            "topic": "客服解答",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "客服说明了第一次使用的清洗方法，步骤很清楚"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-023",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-09",
+        "text": "杯盖能拆开洗，清洁起来省事。",
+        "sentiment": "positive",
+        "category": "user_experience",
+        "priority": "low",
+        "summary": "杯盖能拆开洗，清洁起来省事",
+        "aspects": [
+          {
+            "topic": "清洁便利",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "杯盖能拆开洗，清洁起来省事"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-024",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-10",
+        "text": "周末骑行带一杯水够用，容量很实在。",
+        "sentiment": "positive",
+        "category": "user_experience",
+        "priority": "low",
+        "summary": "周末骑行带一杯水够用，容量很实在",
+        "aspects": [
+          {
+            "topic": "容量适用",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "周末骑行带一杯水够用，容量很实在"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-025",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-11",
+        "text": "这次包装很完整，里面有保护纸垫。",
+        "sentiment": "positive",
+        "category": "delivery",
+        "priority": "low",
+        "summary": "这次包装很完整，里面有保护纸垫",
+        "aspects": [
+          {
+            "topic": "包装完好",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "这次包装很完整，里面有保护纸垫"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-026",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-12",
+        "text": "礼盒和杯子都完好，送朋友很合适。",
+        "sentiment": "positive",
+        "category": "delivery",
+        "priority": "low",
+        "summary": "礼盒和杯子都完好，送朋友很合适",
+        "aspects": [
+          {
+            "topic": "包装完好",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "礼盒和杯子都完好，送朋友很合适"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-027",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-13",
+        "text": "在约定当天收到，周末使用没有耽误。",
+        "sentiment": "positive",
+        "category": "delivery",
+        "priority": "low",
+        "summary": "在约定当天收到，周末使用没有耽误",
+        "aspects": [
+          {
+            "topic": "配送准时",
+            "kind": "praise",
+            "sentiment": "positive",
+            "evidence": "在约定当天收到，周末使用没有耽误"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-028",
+        "product": "森野保温杯500ml",
+        "date": "2026-10-14",
+        "text": "希望发货延迟时能主动通知，不用反复查看订单。",
+        "sentiment": "neutral",
+        "category": "features",
+        "priority": "low",
+        "summary": "希望发货延迟时能主动通知，不用反复查看订单",
+        "aspects": [
+          {
+            "topic": "订单进度提醒",
+            "kind": "request",
+            "sentiment": "neutral",
+            "evidence": "希望发货延迟时能主动通知，不用反复查看订单"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-029",
+        "product": "远行随行杯700ml",
+        "date": "2026-10-08",
+        "text": "建议增加物流异常提醒，让顾客提前安排收货。",
+        "sentiment": "neutral",
+        "category": "features",
+        "priority": "low",
+        "summary": "建议增加物流异常提醒，让顾客提前安排收货",
+        "aspects": [
+          {
+            "topic": "订单进度提醒",
+            "kind": "request",
+            "sentiment": "neutral",
+            "evidence": "建议增加物流异常提醒，让顾客提前安排收货"
+          }
+        ]
+      },
+      {
+        "review_id": "DEMO-CURRENT-030",
+        "product": "云朵轻饮杯350ml",
+        "date": "2026-10-09",
+        "text": "如果保护材料能用可回收纸替代塑料会更好。",
+        "sentiment": "neutral",
+        "category": "suggestions",
+        "priority": "low",
+        "summary": "如果保护材料能用可回收纸替代塑料会更好",
+        "aspects": [
+          {
+            "topic": "包装减塑",
+            "kind": "request",
+            "sentiment": "neutral",
+            "evidence": "如果保护材料能用可回收纸替代塑料会更好"
+          }
+        ]
+      }
+    ]
+  }
+}

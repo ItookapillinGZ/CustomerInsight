@@ -1,0 +1,64 @@
+# Add after compose.jobs.yml. Existing SQLite files and the usage ledger remain.
+x-account-env: &account-env
+  APP_DATABASE_URL: "postgresql+psycopg://customerinsight:${APP_POSTGRES_PASSWORD:?Set APP_POSTGRES_PASSWORD before starting accounts}@postgres:5432/customerinsight"
+  APP_DATA_DIR: /data/customerinsight
+  APP_USAGE_DB_PATH: /data/product_usage.sqlite3
+  APP_PUBLIC_MODE: "false"
+
+services:
+  customerinsight:
+    image: customerinsight-backend:phase3
+    environment:
+      <<: *account-env
+      APP_UI_MODE: api
+  api:
+    image: customerinsight-backend:phase3
+    environment: *account-env
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+  worker:
+    image: customerinsight-backend:phase3
+    environment: *account-env
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+  dispatcher:
+    image: customerinsight-backend:phase3
+    environment: *account-env
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+  db-init:
+    build: .
+    image: customerinsight-backend:phase3
+    command: [python, -m, alembic, upgrade, head]
+    environment: *account-env
+    restart: "no"
+    healthcheck:
+      disable: true
+    depends_on:
+      postgres:
+        condition: service_healthy
+    init: true
+    security_opt:
+      - no-new-privileges:true
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: customerinsight
+      POSTGRES_USER: customerinsight
+      POSTGRES_PASSWORD: "${APP_POSTGRES_PASSWORD:?Set APP_POSTGRES_PASSWORD}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U customerinsight -d customerinsight]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  postgres_data:

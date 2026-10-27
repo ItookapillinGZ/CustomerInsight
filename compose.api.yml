@@ -1,0 +1,44 @@
+# Optional API alongside the existing browser app. Start only the api service to
+# keep the current Streamlit container and its in-session results untouched.
+services:
+  api:
+    build: .
+    image: customerinsight-api:phase1
+    command:
+      - python
+      - -m
+      - uvicorn
+      - backend.app:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --workers
+      - "1"
+      - --no-access-log
+    restart: unless-stopped
+    ports:
+      - "${APP_BIND_HOST:-127.0.0.1}:${APP_API_PORT:-8000}:8000"
+    env_file:
+      - .env
+    environment:
+      APP_DATA_DIR: /data/customerinsight
+      APP_USAGE_DB_PATH: /data/product_usage.sqlite3
+      APP_API_TOKEN: "${APP_API_TOKEN:?Set a long APP_API_TOKEN in .env before starting the API}"
+    volumes:
+      - usage_data:/data
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=3)"
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+
+volumes:
+  usage_data:

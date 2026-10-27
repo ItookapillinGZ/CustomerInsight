@@ -1,0 +1,98 @@
+name: Offline backend checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  offline-and-postgres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      # Keep every uv subcommand on CI's interpreter despite .python-version.
+      UV_PYTHON: '3.12'
+      OPENAI_API_KEY: ci-unused-not-a-provider-key
+      OPENAI_BASE_URL: http://blocked.invalid/v1
+      OPENAI_MODEL: offline-ci-model
+      API_MODE: chat_completions
+      CHAT_OUTPUT_MODE: json_object
+      APP_API_TOKEN: ci-local-only-unused-token
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci-isolated-only
+          POSTGRES_DB: customerinsight_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ci -d customerinsight_test"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.11.15'
+          enable-cache: true
+      - name: Install exact locked environment
+        run: uv sync --frozen --python 3.12
+      - name: Compile sources and validate dependency manifests
+        run: |
+          uv lock --check
+          uv run --frozen python -m compileall -q ai backend core models evaluation tools tests app.py
+          uv export --frozen --no-dev --no-emit-project --format requirements-txt --no-hashes --output-file /tmp/requirements.lock.txt
+          diff --strip-trailing-cr -u <(tail -n +3 requirements.txt) <(tail -n +3 /tmp/requirements.lock.txt)
+          uv build --wheel --no-sources
+      - name: Full offline regression
+        run: uv run --frozen python -m unittest discover -s tests -v
+      - name: Real PostgreSQL isolation and repository suites
+        env:
+          TEST_PG_URL: postgresql+psycopg://ci:ci-isolated-only@localhost:5432/customerinsight_test
+        run: |
+          uv run --frozen python -m unittest discover -s tests -p 'test_pg_*.py' -v
+          uv run --frozen python -m unittest discover -s tests -p test_accounts.py -v
+          uv run --frozen python -m unittest discover -s tests -p test_account_api.py -v
+          uv run --frozen python -m unittest tests.test_remote_ui.RemoteWorkspaceApiTests -v
+      - name: Verify Redis service
+        run: uv run --frozen python -c "import redis; assert redis.Redis(host='localhost').ping()"
+      - name: Build production image
+        run: docker build --tag customerinsight-backend:ci .
+      - name: Guarded real Redis and Celery account integration
+        run: uv run --frozen python tools/verify_account_queue.py --image customerinsight-backend:ci
+      - name: Guarded full backup and isolated restore rehearsal
+        run: uv run --frozen python tools/verify_backup_restore.py --image customerinsight-backend:ci
+      - name: Isolated real HTTP scheduling benchmark
+        run: uv run --frozen python tools/benchmark_backend.py --image customerinsight-backend:ci --timeout 300
+      - name: Retain aggregate evidence and diagnostic logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: isolated-backend-evidence
+          path: |
+            .runtime/phase3/acceptance/**/summary.json
+            .runtime/phase3/acceptance/**/workers.log
+            .runtime/phase4/benchmark/**/summary.json
+            .runtime/phase4/benchmark/**/workers.log
+            .runtime/phase4/backup-restore/**/summary.json
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 7
