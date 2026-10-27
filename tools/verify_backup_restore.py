@@ -13,6 +13,7 @@ from pathlib import Path
 import re
 import secrets
 import sys
+from textwrap import indent
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -93,6 +94,20 @@ print(json.dumps({'reports': 1, 'chat_turns': 1, 'jobs': 1, 'unknown_groups': 1,
 '''
 
 
+def _guarded_seed(source):
+    """Return only a safe exception class when the isolated fixture fails.
+
+    Docker.run already recognises a final stderr JSON object with an ``error``
+    identifier. Ordinary Python tracebacks are intentionally suppressed there,
+    so an unguarded fixture used to hide every useful failure classification.
+    Never include the exception message: database errors may contain a URL.
+    """
+    return ("import json, sys\ntry:\n" + indent(source, "    ")
+            + "\nexcept Exception as exc:\n"
+            + "    print(json.dumps({'error': type(exc).__name__}), file=sys.stderr)\n"
+            + "    raise SystemExit(1) from None\n")
+
+
 def verify_backup_restore(*, image="customerinsight-backend:phase3"):
     if not isinstance(image, str) or not re.fullmatch(r"[a-z0-9./:_-]+", image):
         raise BackupError("验收镜像名称无效。")
@@ -132,16 +147,24 @@ def verify_backup_restore(*, image="customerinsight-backend:phase3"):
     docker = Docker()
     prefix = compose_prefix([compose], project, empty)
     summary = None
+    phase = "source_start"
+    primary_error = None
     try:
         docker.run(*prefix, "up", "--detach", "--wait", "--wait-timeout", "90", timeout=180)
+        phase = "source_container_lookup"
         identifiers = docker.ids(*prefix, "ps", "--quiet", "api")
         if len(identifiers) != 1:
             raise BackupError("独立验收 API 占位容器不存在。")
-        seeded = json.loads(docker.run("exec", "-i", identifiers[0], "python", "-", input=SEED.encode()).decode().splitlines()[-1])
+        phase = "synthetic_seed"
+        seeded = json.loads(docker.run("exec", "-i", identifiers[0], "python", "-",
+                                      input=_guarded_seed(SEED).encode()).decode().splitlines()[-1])
+        phase = "backup"
         backup = backup_workspace(output=run / "synthetic-workspace.zip", compose_files=[compose],
                                   project=project, env_file=empty, docker=docker)
+        phase = "isolated_restore"
         restored = restore_workspace(run / "synthetic-workspace.zip", project=restore_project,
                                      app_image=image, cleanup=True, evidence=run / "restore-verification.json", docker=docker)
+        phase = "verify_restored_evidence"
         proof = json.loads((run / "restore-verification.json").read_text("utf-8"))
         if (proof["table_counts"].get("history_batches") != 1
                 or proof["table_counts"].get("analysis_jobs") != 1
@@ -159,12 +182,27 @@ def verify_backup_restore(*, image="customerinsight-backend:phase3"):
             "restored_resources_removed": restored["cleaned_up"],
             "published_ports": [], "model_requests": 0,
         }
+    except BackupError as exc:
+        primary_error = BackupError("合成备份验收阶段 " + phase + " 未完成：" + str(exc))
+        raise primary_error from exc
+    except Exception as exc:
+        primary_error = BackupError("合成备份验收阶段 " + phase + " 未完成；错误类型：" + type(exc).__name__)
+        raise primary_error from exc
     finally:
         # A UUID-only project created here, with an explicit generated Compose
         # file, is the only source deployment this fixture can ever remove.
         if not re.fullmatch(r"customerinsight-backup-check-[0-9a-f]{16}", project) or compose.parent != run:
             raise BackupError("拒绝清理非验收项目。")
-        docker.run(*prefix, "down", "--volumes", "--remove-orphans", timeout=90)
+        try:
+            docker.run(*prefix, "down", "--volumes", "--remove-orphans", timeout=90)
+        except BackupError as exc:
+            cleanup_error = "合成备份验收阶段 source_cleanup 未完成：" + str(exc)
+            if primary_error is not None:
+                # Preserve the original failure if cleanup also fails. These
+                # two messages contain only fixed stages and safe Docker errors.
+                print(cleanup_error, file=sys.stderr)
+            else:
+                raise BackupError(cleanup_error) from exc
     summary["source_resources_removed"] = True
     private_json(run / "summary.json", summary)
     return {**summary, "evidence": str(run / "summary.json")}
