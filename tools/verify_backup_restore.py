@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 import re
 import secrets
+import subprocess
 import sys
 from textwrap import indent
 
@@ -108,6 +109,87 @@ def _guarded_seed(source):
             + "    raise SystemExit(1) from None\n")
 
 
+def _docker_error_kind(output):
+    """Reduce Docker's potentially sensitive text to a fixed classification."""
+    text = output.lower()
+    for marker, label in (
+        ("no healthcheck", "missing_healthcheck"), ("unhealthy", "container_unhealthy"),
+        ("permission denied", "permission_denied"), ("no space left", "disk_full"),
+        ("no such image", "image_missing"), ("pull access denied", "image_unavailable"),
+        ("unknown flag", "unsupported_option"), ("unknown shorthand flag", "unsupported_option"),
+        ("address already in use", "address_conflict"), ("port is already allocated", "address_conflict"),
+        ("invalid compose project", "invalid_project"), ("exited", "container_exited"),
+        ("cannot connect to the docker daemon", "docker_unavailable"),
+    ):
+        if marker in text:
+            return label
+    return "unclassified_start_failure"
+
+
+def _redacted_start_tail(output, password):
+    """Only generated-fixture startup output, never deployment/container logs."""
+    text = output.replace(password, "[REDACTED]")
+    text = re.sub(r"(?i)([a-z][a-z0-9+.-]*://)[^\s/@]+(?::[^\s/@]*)?@",
+                  r"\1[REDACTED]@", text)
+    text = re.sub(r'''(?ix)(["']?[a-z0-9_]*(?:password|passwd|token|secret|api_key|database_url)["']?\s*[:=]\s*)
+                      (?:"[^"]*"|'[^']*'|[^\s,;]+)''', r"\1[REDACTED]", text)
+    text = re.sub(r"(?i)(\bBearer\s+)\S+", r"\1[REDACTED]", text)
+    text = re.sub(r"(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9_-]{16,})",
+                  "[REDACTED]", text)
+    return [line[:1000] for line in text.splitlines()[-20:]]
+
+
+def _source_start_states(docker, prefix, project):
+    """Inspect only this UUID fixture, returning a small explicit field list."""
+    if not re.fullmatch(r"customerinsight-backup-check-[0-9a-f]{16}", project):
+        raise BackupError("拒绝诊断非验收项目。")
+    identifiers = docker.ids(*prefix, "ps", "--all", "--quiet")
+    if not identifiers:
+        return []
+    states = []
+    for item in docker.json("inspect", *identifiers):
+        labels = (item.get("Config") or {}).get("Labels") or {}
+        service = labels.get("com.docker.compose.service")
+        if labels.get("com.docker.compose.project") != project or service not in {"postgres", "api"}:
+            continue
+        state = item.get("State") or {}
+        status = state.get("Status")
+        health = (state.get("Health") or {}).get("Status")
+        name = item.get("Name", "")
+        states.append({
+            "service": service,
+            "name": name if re.fullmatch(r"/?[A-Za-z0-9_-]{1,150}", name) else "omitted",
+            "status": status if status in {"created", "running", "paused", "restarting", "removing", "exited", "dead"} else "unknown",
+            "exit_code": state.get("ExitCode") if type(state.get("ExitCode")) is int else None,
+            "oom_killed": state.get("OOMKilled") is True,
+            "health_status": health if health in {"starting", "healthy", "unhealthy"} else "none",
+        })
+    return states
+
+
+def _start_source(docker, prefix, project, password):
+    """Capture only this newly generated Compose start; suppress raw output."""
+    try:
+        result = subprocess.run(["docker", *map(str, prefix), "up", "--detach", "--wait", "--wait-timeout", "90"],
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                env=docker.environment, timeout=180, check=False)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise BackupError("验收 Docker Compose 启动未完成；错误类型：" + type(exc).__name__) from None
+    if not result.returncode:
+        return
+    output = (result.stderr or result.stdout or b"").decode("utf-8", errors="replace")
+    diagnostic = {"phase": "source_start", "docker_exit_code": result.returncode,
+                  "docker_error_kind": _docker_error_kind(output)}
+    try:
+        diagnostic["services"] = _source_start_states(docker, prefix, project)
+    except Exception as exc:
+        diagnostic["state_diagnostic_error"] = type(exc).__name__
+    diagnostic["redacted_fixture_start_tail"] = _redacted_start_tail(output, password)
+    print(json.dumps(diagnostic, ensure_ascii=False), file=sys.stderr)
+    raise BackupError("验收 Docker Compose 启动失败；退出码 " + str(result.returncode)
+                      + "；错误类别 " + diagnostic["docker_error_kind"])
+
+
 def verify_backup_restore(*, image="customerinsight-backend:phase3"):
     if not isinstance(image, str) or not re.fullmatch(r"[a-z0-9./:_-]+", image):
         raise BackupError("验收镜像名称无效。")
@@ -132,7 +214,13 @@ def verify_backup_restore(*, image="customerinsight-backend:phase3"):
             "api": {
                 "image": image, "init": True,
                 "command": ["python", "-c", "import time; time.sleep(7200)"],
-                "healthcheck": {"disable": True}, "volumes": ["usage_data:/data"],
+                # This is only the sleeping fixture container's liveness
+                # check, not API readiness. An explicit check also avoids the
+                # Compose --wait + disable:true regression on older runners:
+                # https://github.com/docker/compose/issues/13522
+                "healthcheck": {"test": ["CMD", "python", "-c", "import os; os.kill(1, 0)"],
+                                "interval": "1s", "timeout": "2s", "retries": 15},
+                "volumes": ["usage_data:/data"],
                 "environment": {"APP_DATABASE_URL": f"postgresql+psycopg://fixture:{password}@postgres:5432/fixture",
                                 "APP_DATA_DIR": "/data/customerinsight", "APP_USAGE_DB_PATH": "/data/product_usage.sqlite3",
                                 "OPENAI_API_KEY": "", "OPENAI_BASE_URL": "https://blocked.invalid"},
@@ -150,7 +238,7 @@ def verify_backup_restore(*, image="customerinsight-backend:phase3"):
     phase = "source_start"
     primary_error = None
     try:
-        docker.run(*prefix, "up", "--detach", "--wait", "--wait-timeout", "90", timeout=180)
+        _start_source(docker, prefix, project, password)
         phase = "source_container_lookup"
         identifiers = docker.ids(*prefix, "ps", "--quiet", "api")
         if len(identifiers) != 1:
